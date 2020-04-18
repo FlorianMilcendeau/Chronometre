@@ -1,13 +1,20 @@
+html{
+	height: 100%;
+}
+
 body {
-	background-color: #dfe6e9;
 	display: flex;
-	align-items: center;
 	justify-content: center;
+	align-items: center;	
+	background-color: #dfe6e9;
 	font-family: sans-serif;
 	color: #212529;
 	font-size: 20vw;
 	font-weight: bold;
 	cursor: pointer;
+	height: 100%; 
+	margin: 0;
+	padding: 0;
 }
 
 #timer{
