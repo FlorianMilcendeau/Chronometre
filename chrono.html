@@ -6,16 +6,25 @@
 		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
 	<body>
-		<div class="theme-switch-wrapper">
- 	 		<label class="theme-switch" for="checkbox">
-       			<input type="checkbox" id="checkbox" />
-        		<div class="slider round"></div>
-  			</label>
-  			<em>Dark Mode</em>
-		</div>
-		<div>
+		<ul class="setting">	
+			<li class="theme-switch-wrapper">
+	 	 		<label class="theme-switch" for="checkbox">
+	       			<input type="checkbox" id="checkbox" />
+	        		<div class="slider round"></div>
+	  			</label>
+	  			<em>Dark Mode</em>
+			</li>
+			<li class="milli-switch-wrapper">
+	 	 		<label class="milli-switch" for="checkbox2">
+	       			<input type="checkbox" id="checkbox2" />
+	        		<div class="slider2 round2"></div>
+	  			</label>
+	  			<em>Display Milliseconds</em>
+			</li>
+		</ul>
+		<div class="chrono">
 			<p id="timer">
-				<span id="minute">00</span>"<span id="seconds">00</span>
+				<span id="minute">00</span>"<span id="seconds">00</span><span id="milliseconds">.000</span>
 			</p>
 		</div>
 		<script src="script.js"></script>
