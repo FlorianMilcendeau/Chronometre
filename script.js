@@ -1,55 +1,72 @@
 var feature = {
-	//Choose theme light or dark
-	theme : function  () {
-		const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+	
+	display: {
+		//Choose theme light or dark
+		theme: function  () {
+			const toggleSwitchTheme = document.querySelector('.theme-switch input[type="checkbox"]')
+		
+			function switchTheme(e) {
+		    	if (e.target.checked) {
+		        document.documentElement.setAttribute('data-theme', 'dark')
+		    	}
+		    	else {
+		    	    document.documentElement.setAttribute('data-theme', 'light')
+		    	}    
+			}
+			toggleSwitchTheme.addEventListener('change', switchTheme, false)
+			},
+		//Show or hide milliseconds 
+		showMilli: function () {
+			const toggleSwitchMilli = document.querySelector(".milli-switch input[type=checkbox]")
 
-		function switchTheme(e) {
-    		if (e.target.checked) {
-        	document.documentElement.setAttribute('data-theme', 'dark');
-    		}
-    		else {
-    		    document.documentElement.setAttribute('data-theme', 'light');
-    		}    
-		}
-		toggleSwitch.addEventListener('change', switchTheme, false);
+			function switchMilli(e) {
+				if (e.target.checked) {
+					milliseconds.style.display = "initial"
+				}else{
+					milliseconds.style.display = "none"
+				}
+			}
+
+			toggleSwitchMilli.addEventListener("change", switchMilli)
+		} 
+
+		
 	},
 
 	timer: {
 		stopAndStart: function () {
-			timer.addEventListener("click", function() {
-				//Initialised start and difference.
-				localStorage.start = localStorage.start ? localStorage.start : Date.now()
-				localStorage.diff  = localStorage.diff  ? localStorage.diff  : 0
+			//Initialised start and difference.
+			localStorage.start = localStorage.start ? localStorage.start : Date.now()
+			localStorage.diff  = localStorage.diff  ? localStorage.diff  : 0
 			
-				if (launch) {
-					//In progress
-					tick()
-					clearInterval(interval)
-					interval = setInterval(tick, 1000)
-					launch = false
-				}else {
-					//Stop
-					arrest = Date.now()
-					launch = true
+			if (launch) {
+				//In progress
+				tick()
 				clearInterval(interval)
-				}
-			})
+				interval = setInterval(tick, 1)
+				launch = false
+			}else {
+				//Stop
+				arrest = Date.now()
+				launch = true
+				clearInterval(interval)
+			}
+		
 		},
 		reset: function () {
-			timer.addEventListener("dblclick", () => {
 			clearInterval(interval)
 			localStorage.diff  = 0
 			localStorage.start = Date.now()
-			interval = setInterval(tick, 1000)
+			interval = setInterval(tick, 1)
 			tick()
-			})
 		}
 	}
 }
 
 const timer  = document.getElementById("timer"),
 	  second = document.getElementById("seconds"),
-	  minute = document.getElementById("minute")
+	  minute = document.getElementById("minute"),
+	  milliseconds = document.getElementById("milliseconds") 
 		
 let interval, launch = false, arrest = 0
 		
@@ -58,20 +75,24 @@ const tick = () => {
 
 	arrest = 0
 	const currentTime = Date.now() - (parseInt(localStorage.start, 10) + parseInt(localStorage.diff, 10))
-	minute.textContent = Math.trunc(currentTime / 60000) % 60
-	second.textContent = Math.trunc(currentTime / 1000) % 60
+	minute.textContent = String(Math.trunc(currentTime / 60000) % 60).padStart(2, '0')
+	second.textContent = String(Math.trunc(currentTime / 1000) % 60).padStart(2, '0')
+	milliseconds.textContent = "." + String(Math.trunc(currentTime) % 1000).padStart(2, '0').slice(0, 2)
 }
 
 if (localStorage.start) {
-	interval = setInterval(tick, 1000)
+	interval = setInterval(tick, 1)
 	tick()
 }
 
-/*Stopwatch event------------------------------------*/
-feature.timer.stopAndStart()
+/*Stopwatch event-------------------------------------*/
+timer.addEventListener("click", feature.timer.stopAndStart)
 
 /*Reset-----------------------------------------------*/
-feature.timer.reset()
+timer.addEventListener("dblclick", feature.timer.reset)
 
 /*color scheme----------------------------------------*/
-feature.theme()
+feature.display.theme()
+
+/*display milliseconds--------------------------------*/
+feature.display.showMilli()
