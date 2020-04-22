@@ -1,30 +1,31 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en-US">
 	<head>
 		<meta charset="utf-8">
 		<title>Chronomètre</title>
 		<link rel="stylesheet" type="text/css" href="style.css">
+		<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
 	</head>
 	<body>
 		<ul class="setting">	
 			<li class="theme-switch-wrapper">
 	 	 		<label class="theme-switch" for="checkbox">
 	       			<input type="checkbox" id="checkbox" />
-	        		<div class="slider round"></div>
+	        		<span class="slider round"></span>
 	  			</label>
 	  			<em>Dark Mode</em>
 			</li>
 			<li class="milli-switch-wrapper">
 	 	 		<label class="milli-switch" for="checkbox2">
 	       			<input type="checkbox" id="checkbox2" />
-	        		<div class="slider2 round2"></div>
+	        		<span class="slider2 round2"></span>
 	  			</label>
 	  			<em>Display Milliseconds</em>
 			</li>
 		</ul>
 		<div class="chrono">
 			<p id="timer">
-				<span id="minute">00</span>"<span id="seconds">00</span><span id="milliseconds">.000</span>
+				<span id="hour">00</span>:<span id="minute">00</span>:<span id="seconds">00</span><span id="milliseconds">.000</span>
 			</p>
 		</div>
 		<script src="script.js"></script>
