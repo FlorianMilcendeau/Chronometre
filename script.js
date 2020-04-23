@@ -28,7 +28,23 @@ if (typeof feature === "undefined") {
 				}
 
 				toggleSwitchMilli.addEventListener("change", switchMilli)
-			} 		
+			},
+			captureTime: () => {
+				let table	= document.querySelector("table"),
+					tbody   = document.querySelector("tbody"),
+					tr 		= document.createElement("tr"),
+					tdStage = document.createElement("td"),	
+					tdTime  = document.createElement("td")
+					previousChild = tbody.lastElementChild
+					
+				tdStage.textContent = previousChild === null ? tdStage.textContent = 1 : tdStage.textContent = parseInt(previousChild.firstChild.textContent, 10) + 1
+				tdTime.textContent  = hour.textContent + "h" + minute.textContent + '"' + second.textContent + milliseconds.textContent
+
+				tr.appendChild(tdStage)
+				tr.appendChild(tdTime)
+				tbody.appendChild(tr)
+				table.style.display = "table"
+			}		
 		},
 
 		timer: {
@@ -83,7 +99,8 @@ const timer  	   = document.getElementById("timer"),
 	  hour   	   = document.getElementById("hour"),
 	  minute 	   = document.getElementById("minute"),
 	  second 	   = document.getElementById("seconds"),
-	  milliseconds = document.getElementById("milliseconds") 
+	  milliseconds = document.getElementById("milliseconds"),
+	  sendTime     = document.getElementById("sendTime") 
 		
 let interval, launch = false, arrest = 0
 
@@ -103,3 +120,6 @@ feature.display.theme()
 
 /*display milliseconds--------------------------------*/
 feature.display.showMilli()
+
+/*capture the time------------------------------------*/
+sendTime.addEventListener("click", feature.display.captureTime)
