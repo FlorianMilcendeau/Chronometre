@@ -29,22 +29,37 @@ if (typeof feature === "undefined") {
 
 				toggleSwitchMilli.addEventListener("change", switchMilli)
 			},
+			//In this function I create elements neccesary to add the time captured in our table
 			captureTime: () => {
 				let table	= document.querySelector("table"),
 					tbody   = document.querySelector("tbody"),
 					tr 		= document.createElement("tr"),
 					tdStage = document.createElement("td"),	
-					tdTime  = document.createElement("td")
+					tdTime  = document.createElement("td"),
 					previousChild = tbody.lastElementChild
 					
 				tdStage.textContent = previousChild === null ? tdStage.textContent = 1 : tdStage.textContent = parseInt(previousChild.firstChild.textContent, 10) + 1
 				tdTime.textContent  = hour.textContent + "h" + minute.textContent + '"' + second.textContent + milliseconds.textContent
 
+				tr.className = "time"
 				tr.appendChild(tdStage)
 				tr.appendChild(tdTime)
 				tbody.appendChild(tr)
 				table.style.display = "table"
-			}		
+			},
+			/*In this function, delete the required time and decrement each identifier*/
+			deleteTime: (e) => {
+				let tr = document.querySelectorAll(".time"),
+					nextTime = e.target.parentNode.nextElementSibling
+				
+				if (nextTime) {
+					while (nextTime) {	
+						nextTime.firstChild.textContent -= 1
+						nextTime = nextTime.nextElementSibling
+					}	
+				}
+				tbody.removeChild(e.target.parentNode)
+			}	
 		},
 
 		timer: {
@@ -100,7 +115,8 @@ const timer  	   = document.getElementById("timer"),
 	  minute 	   = document.getElementById("minute"),
 	  second 	   = document.getElementById("seconds"),
 	  milliseconds = document.getElementById("milliseconds"),
-	  sendTime     = document.getElementById("sendTime") 
+	  sendTime     = document.getElementById("sendTime"),
+	  tbody		   = document.getElementsByTagName("tbody")[0]
 		
 let interval, launch = false, arrest = 0
 
@@ -109,17 +125,15 @@ if (localStorage.start) {
 	feature.timer.tick()
 }
 
-/*Stopwatch event-------------------------------------*/
+
 timer.addEventListener("click", feature.timer.stopAndStart)
 
-/*Reset-----------------------------------------------*/
 timer.addEventListener("dblclick", feature.timer.reset)
 
-/*color scheme----------------------------------------*/
 feature.display.theme()
 
-/*display milliseconds--------------------------------*/
 feature.display.showMilli()
 
-/*capture the time------------------------------------*/
 sendTime.addEventListener("click", feature.display.captureTime)
+
+tbody.addEventListener("click", feature.display.deleteTime)
