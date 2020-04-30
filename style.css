@@ -5,6 +5,8 @@
   --sec-color: #636e72;
   --slide-color:#becacf;
   --slideB-color: #66bb6a;
+  --shadow-color: #95afc0;
+  --table-back-title-color: #6a7b80;
 }
 
 [data-theme="dark"]{
@@ -13,25 +15,13 @@
   --min-color: #636e72;
   --sec-color: #8395a7;
   --slide-color: #8395a7;
-  --slideB-color:#3e7340;
+  --slideB-color: #3e7340;
+  --shadow-color: #576873;
+  --table-back-title-color: #3d474a;
 }
 
-header{
-  grid-area: header;
-}
-
-#chrono{
-  grid-area: chrono;
-}
-
-#perf{
-  grid-area: perf;
-}
 
 body{
-  display: grid;
-  grid-template-areas: "header perf"
-                       "chrono chrono";
   background-color: var(--bg-color);
   color: var(--color);
   font-family: sans-serif;
@@ -219,15 +209,15 @@ input:checked + .slider2:before {
   letter-spacing: 0.1em;
   font-weight: bolder;
   user-select: none;
+  cursor: pointer;
 }
 
 #sendTime:hover{
-  background-color: rgba(60, 99, 130, 0.2);
-  box-shadow: 0 5px 5px #95afc0;
+  box-shadow: 0 5px 5px var(--shadow-color);
 }
 
 #sendTime:active{
-  background-color: rgba(60, 99, 130, 0.5);
+  background-color: rgba(60, 99, 130, 0.2);
   color: #dfe6e9;
   border-top-color: #c4c4c4;
   border-left-color: #c4c4c4;
@@ -258,30 +248,24 @@ th{
 }
 
 thead tr{
-  background-color: #636e72;
+  background-color: var(--table-back-title-color);
+  color: var(--min-color);
+  height: 30px
 }
 
-tbody tr:nth-child(2n + 1){
-  background-color: #d1d8e0;
-}
-
-tr:nth-child(2n){
-  background-color: #a5b1c2;
+tbody tr:hover{
+  background-color: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 }
 
 td{
-  color: #636e72;
+  color: var(--sec-color);
   height: 30px;
 }
 
 /*Layout for cellphone----------------------------------------*/
 
 @media only screen and (max-width: 400px) {
-  body{
-    grid-template-areas: "header"
-                         "chrono"
-                         "perf";
-  }
   ul.setting{
     margin-left: 5px;
   }
