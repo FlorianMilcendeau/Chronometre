@@ -7,7 +7,7 @@ if (typeof feature === "undefined") {
 			
 				function switchTheme(e) {
 			    	if (e.target.checked) {
-			        document.documentElement.setAttribute('data-theme', 'dark')
+			        	document.documentElement.setAttribute('data-theme', 'dark')
 			    	}
 			    	else {
 			    	    document.documentElement.setAttribute('data-theme', 'light')
@@ -32,7 +32,6 @@ if (typeof feature === "undefined") {
 			//In this function I create elements neccesary to add the time captured in our table
 			captureTime: () => {
 				let table	= document.querySelector("table"),
-					tbody   = document.querySelector("tbody"),
 					tr 		= document.createElement("tr"),
 					tdStage = document.createElement("td"),	
 					tdTime  = document.createElement("td"),
@@ -59,6 +58,9 @@ if (typeof feature === "undefined") {
 					}	
 				}
 				tbody.removeChild(e.target.parentNode)
+				if (tbody.firstElementChild === null) {
+					tbody.parentNode.style.display = "none"
+				}
 			}	
 		},
 
