@@ -35,8 +35,8 @@ ul.setting{
   padding-left: 5px;
 }
 
-/*CSS toggle switch colors sheme------------------------*/
-.theme-switch-wrapper{
+/*CSS toggle switch colors sheme and CSS toggle switch milliseconds---------*/
+.theme-switch-wrapper, .milli-switch-wrapper{
   display: flex;
   align-items: center;
 }
@@ -46,18 +46,18 @@ em{
     font-size: 0.9rem;
 }
 
-.theme-switch {
+.theme-switch, .milli-switch {
   display: inline-block;
   height: 25px;
   position: relative;
   width: 60px;
 }
 
-.theme-switch input {
+.theme-switch input, .milli-switch input {
   display:none;
 }
 
-.slider {
+.slider, .slider2 {
   background-color: var(--slide-color);
   bottom: 0;
   cursor: pointer;
@@ -68,7 +68,7 @@ em{
   transition: .4s;
 }
 
-.slider:before {
+.slider:before, .slider2:before {
   background-color: #fff;
   bottom: 4px;
   content: "";
@@ -79,78 +79,24 @@ em{
   width: 17px;
 }
 
-input:checked + .slider {
+input:checked + .slider, input:checked + .slider2 {
   background-color: var(--slideB-color);
 }
 
-input:checked + .slider:before {
+input:checked + .slider:before, input:checked + .slider2:before {
   transform: translateX(34px);
 }
 
-.slider.round {
+.slider.round, .slider2.round2 {
   border-radius: 34px;
 }
 
-.slider.round:before {
+.slider.round:before, .slider2.round2:before {
   border-radius: 50%;
 }
 
-/*CSS toggle switch milliseconds------------------------*/
-.milli-switch{
-  display: inline-block;
-  height: 25px;
-  position: relative;
-  width: 60px;
-}
+/*--------------------------------------------------------------------------*/
 
-.milli-switch-wrapper{
-  display: flex;
-  align-items: center;
-}
-
-.milli-switch input {
-  display:none;
-}
-
-.slider2 {
-  background-color: var(--slide-color);
-  bottom: 0;
-  cursor: pointer;
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-  transition: .4s;
-}
-
-.slider2:before {
-  background-color: #fff;
-  bottom: 4px;
-  content: "";
-  height: 17px;
-  left: 4px;
-  position: absolute;
-  transition: .4s;
-  width: 17px;
-}
-
-input:checked + .slider2 {
-  background-color: var(--slideB-color);
-}
-
-input:checked + .slider2:before {
-  transform: translateX(34px);
-}
-
-.slider2.round2 {
-  border-radius: 34px;
-}
-
-.slider2.round2:before {
-  border-radius: 50%;
-}
-
-/*-------------------------------------------------------*/
 #chrono{
   margin-top: 100px;
 }
@@ -263,7 +209,7 @@ td{
   height: 30px;
 }
 
-/*Layout for cellphone----------------------------------------*/
+/*Layout for cellphone------------------------------------------------------*/
 
 @media only screen and (max-width: 400px) {
   ul.setting{
