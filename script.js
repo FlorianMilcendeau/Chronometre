@@ -83,6 +83,7 @@ if (typeof feature === "undefined") {
 
 		timer: {
 			tick : () => {
+				//calulates the difference of the stop.
 				localStorage.setItem("diff", localStorage.getItem("timeOut") != 0 ? parseInt(Date.now(), 10) - parseInt(localStorage.getItem("timeOut"), 10) + parseInt(localStorage.getItem("diff"), 10) : localStorage.getItem("diff")) 
 
 				localStorage.setItem("timeOut", 0)
