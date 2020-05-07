@@ -5,7 +5,7 @@
   --sec-color: #636e72;
   --slide-color:#becacf;
   --slideB-color: #66bb6a;
-  --shadow-color: #95afc0;
+  --shadow-color: gray;
   --table-back-title-color: #6a7b80;
 }
 
@@ -16,7 +16,7 @@
   --sec-color: #8395a7;
   --slide-color: #8395a7;
   --slideB-color: #3e7340;
-  --shadow-color: #576873;
+  --shadow-color: #242424;
   --table-back-title-color: #3d474a;
 }
 
@@ -119,11 +119,7 @@ input:checked + .slider:before, input:checked + .slider2:before {
   }
 }
 
-#hour{
-  color: var(--min-color);
-}
-
-#minute{
+#hour, #minute{
   color: var(--min-color);
 }
 
@@ -179,6 +175,7 @@ input:checked + .slider:before, input:checked + .slider2:before {
   overflow-y: auto;
   max-height: 150px;
   width: 400px;
+  box-shadow: 0px 0px 10px var(--shadow-color);
 }
 
 table{
@@ -216,40 +213,23 @@ td{
     margin-left: 5px;
   }
 
-  .theme-switch{
+  .theme-switch, .milli-switch{
     height: 30px;
     width: 70px;
   }
 
-  .slider:before {transform: translateX(0px);}
+  .slider:before, .slider2:before  {transform: translateX(0px);}
   
-  input:checked + .slider:before {
+  input:checked + .slider:before, input:checked + .slider2:before  {
     transform: translateX(39px);
   }
 
-  .slider:before {
+  .slider:before, .slider2:before {
     bottom: 4px;
     height: 22px;
     width: 22px;
   }
-
-  .milli-switch{
-    height: 30px;
-    width: 70px;
-  }
   
-  .slider2:before {transform: translateX(0px);}
-  
-  input:checked + .slider2:before {
-    transform: translateX(39px);
-  }
-  
-  .slider2:before {
-    bottom: 4px;
-    height: 22px;
-    width: 22px;
-  }
-
   #perf{
     margin-top: 50px;
   }

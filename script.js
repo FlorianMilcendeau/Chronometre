@@ -1,17 +1,34 @@
 if (typeof feature === "undefined") {
 	var feature = {
+		initialize: () => {
+			//if the start variable does not exist or she is from 0, we initialize from date.now ().
+			if (localStorage.getItem("start") === null || localStorage.getItem("start") == 0) {
+				localStorage.setItem("start", Date.now())
+			}
+
+			//if the launch variable does not exist, we initialize from true.
+			if (localStorage.getItem("launch") == null) {
+				localStorage.setItem("launch", true)
+			}
+
+			//if the timeOut variable don't exist we initialize from 0.
+			if (localStorage.getItem("timeOut") === null) {
+				localStorage.setItem("timeOut", Date.now())
+			}
+		},
+
 		display: {
 			//Choose theme light or dark
 			theme: () => {
 				const toggleSwitchTheme = document.querySelector('.theme-switch input[type="checkbox"]')
-			
+
 				function switchTheme(e) {
 			    	if (e.target.checked) {
 			        	document.documentElement.setAttribute('data-theme', 'dark')
 			    	}
 			    	else {
 			    	    document.documentElement.setAttribute('data-theme', 'light')
-			    	}    
+			    	}
 				}
 				toggleSwitchTheme.addEventListener('change', switchTheme, false)
 			},
@@ -33,10 +50,10 @@ if (typeof feature === "undefined") {
 			captureTime: () => {
 				let table	= document.querySelector("table"),
 					tr 		= document.createElement("tr"),
-					tdStage = document.createElement("td"),	
+					tdStage = document.createElement("td"),
 					tdTime  = document.createElement("td"),
 					previousChild = tbody.lastElementChild
-					
+
 				tdStage.textContent = previousChild === null ? tdStage.textContent = 1 : tdStage.textContent = parseInt(previousChild.firstChild.textContent, 10) + 1
 				tdTime.textContent  = hour.textContent + "h" + minute.textContent + '"' + second.textContent + milliseconds.textContent
 
@@ -55,55 +72,52 @@ if (typeof feature === "undefined") {
 					while (nextTime) {	
 						nextTime.firstChild.textContent -= 1
 						nextTime = nextTime.nextElementSibling
-					}	
+					}
 				}
 				tbody.removeChild(e.target.parentNode)
 				if (tbody.firstElementChild === null) {
 					tbody.parentNode.style.display = "none"
 				}
-			}	
+			}
 		},
 
 		timer: {
 			tick : () => {
-				localStorage.diff = arrest ? (parseInt(Date.now(), 10) - parseInt(arrest, 10)) + parseInt(localStorage.diff, 10) : localStorage.diff
+				localStorage.setItem("diff", localStorage.getItem("timeOut") != 0 ? parseInt(Date.now(), 10) - parseInt(localStorage.getItem("timeOut"), 10) + parseInt(localStorage.getItem("diff"), 10) : localStorage.getItem("diff")) 
 
-				arrest = 0
-				const currentTime = Date.now() - (parseInt(localStorage.start, 10) + parseInt(localStorage.diff, 10))
-				hour.textContent = new String(Math.trunc(currentTime / 3600000)).padStart(2, "0")
+				localStorage.setItem("timeOut", 0)
+				const currentTime = Date.now() - (parseInt(localStorage.getItem("start"), 10) + parseInt(localStorage.getItem("diff"), 10))
+				hour.textContent  = new String(Math.trunc(currentTime / 3600000)).padStart(2, "0")
 				minute.textContent = String(Math.trunc(currentTime / 60000) % 60).padStart(2, "0")
 				second.textContent = String(Math.trunc(currentTime / 1000) % 60).padStart(2, "0")
 				milliseconds.textContent = "." + String(Math.trunc(currentTime) % 1000).padStart(2, "0").slice(0, 2)
 			},
 			stopAndStart: () => {
-				if (localStorage.start == 1) {
-					localStorage.start = Date.now()
-				}
-				//Initialised start and difference.
-				localStorage.start = localStorage.start ? localStorage.start : Date.now()
-				localStorage.diff  = localStorage.diff  ? localStorage.diff  : 0
+				//variable Start initialized if we make reset.
+				localStorage.setItem("start",  localStorage.getItem("start") == 0 ? Date.now() : localStorage.getItem("start"))
 				
-				if (launch) {
+				if (localStorage.getItem("launch") == "true") {
 					//In progress
 					feature.timer.tick()
 					clearInterval(interval)
 					interval = setInterval(feature.timer.tick, 1)
-					launch = false
+					localStorage.setItem("launch", false)
 				}else {
 					//Stop
-					arrest = Date.now()
-					launch = true
+					localStorage.setItem("timeOut",  Date.now())
+					localStorage.setItem("launch", true)
 					clearInterval(interval)
 				}
 			
 			},
+			//we set the counters to zero for the difference and start variables and we stop the timer. 
 			reset: () => {
 				clearInterval(interval)
-				localStorage.diff  = 0
-				localStorage.start = Date.now()
+				localStorage.setItem("diff", 0)
+				localStorage.setItem("start", Date.now())
 				feature.timer.tick()
-				localStorage.start = 1
-				launch = true
+				localStorage.setItem("start", 0)
+				localStorage.setItem("launch", true)
 			}
 		}
 	}
@@ -111,6 +125,9 @@ if (typeof feature === "undefined") {
 	alert("Feature already exist.")
 }
 	
+feature.initialize()
+
+localStorage.setItem("diff", localStorage.getItem("diff")  ? localStorage.getItem("diff")  : 0)
 
 const timer  	   = document.getElementById("timer"),
 	  hour   	   = document.getElementById("hour"),
@@ -120,11 +137,19 @@ const timer  	   = document.getElementById("timer"),
 	  sendTime     = document.getElementById("sendTime"),
 	  tbody		   = document.getElementsByTagName("tbody")[0]
 		
-let interval, launch = false, arrest = 0
+let interval
 
-if (localStorage.start) {
-	interval = setInterval(feature.timer.tick, 1)
+
+//if "start"  exists and "launch" is not on paused when the refreshed of the page, the clock continues.
+if (localStorage.getItem("start") && localStorage.getItem("launch") == "false") {
 	feature.timer.tick()
+	interval = setInterval(feature.timer.tick, 1)
+}else {
+	//i launch the clock and I take timeOut time 
+	feature.timer.tick()
+	interval = setInterval(feature.timer.tick, 1)
+	clearInterval(interval)
+	localStorage.setItem("timeOut", Date.now())
 }
 
 
