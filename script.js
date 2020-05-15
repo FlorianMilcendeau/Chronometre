@@ -50,13 +50,14 @@ if (typeof feature === "undefined") {
 			captureTime: () => {
 				let table	= document.querySelector("table"),
 					tr 		= document.createElement("tr"),
-					tdStage = document.createElement("td"),
+					tdStage = document.createElement("th"),
 					tdTime  = document.createElement("td"),
 					previousChild = tbody.lastElementChild
 
 				tdStage.textContent = previousChild === null ? tdStage.textContent = 1 : tdStage.textContent = parseInt(previousChild.firstChild.textContent, 10) + 1
 				tdTime.textContent  = hour.textContent + "h" + minute.textContent + '"' + second.textContent + milliseconds.textContent
 
+				tdStage.scope = "row"
 				tr.className = "time"
 				tr.appendChild(tdStage)
 				tr.appendChild(tdTime)
