@@ -3,48 +3,53 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Chronomètre</title>
-		<link rel="stylesheet" type="text/css" href="style.css">
 		<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
-		<link rel="icon" type="image/png" href="images.png">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+		<link rel="icon" type="image/png" href="./logo-image/images.png">
+		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
 	<body>
 		<header>
-			<ul class="setting">	
-				<li class="theme-switch-wrapper">
-		 	 		<label class="theme-switch" for="checkbox">
-		       			<input type="checkbox" id="checkbox" />
-		        		<span class="slider round"></span>
-		  			</label>
-		  			<em>Dark Mode</em>
-				</li>
-				<li class="milli-switch-wrapper">
-		 	 		<label class="milli-switch" for="checkbox2">
-		       			<input type="checkbox" id="checkbox2" />
-		        		<span class="slider2 round2"></span>
-		  			</label>
-		  			<em>Display Milliseconds</em>
-				</li>
-			</ul>
+			<details>
+				<summary><img class="logo-setting" src="./logo-image/logo-setting.png" alt="setting"></summary>
+					<ul class="setting">	
+						<li class="theme-switch-wrapper">
+				 	 		<label class="theme-switch" for="checkbox">
+				       			<input type="checkbox" id="checkbox" />
+				        		<span class="slider round"></span>
+				  			</label>
+				  			<em>Dark Mode</em>
+						</li>
+						<li class="milli-switch-wrapper">
+				 	 		<label class="milli-switch" for="checkbox2">
+				       			<input type="checkbox" id="checkbox2" />
+				        		<span class="slider2 round2"></span>
+				  			</label>
+				  			<em>Display Milliseconds</em>
+						</li>
+					</ul>
+		</details>
 		</header>
-			
-		<div id="chrono">
-			<div id="timer">
-				<span id="hour">00</span>:<span id="minute">00</span>:<span id="seconds">00</span><span id="milliseconds">.00</span>
+		<div class="layoutTime">	
+			<div class="chrono">
+				<div id="timer">
+					<span id="hour">00</span>:<span id="minute">00</span>:<span id="seconds">00</span><span id="milliseconds">.00</span>
+				</div>
+				
+				<button id="sendTime" class="buttonTime btn btn-outline-success">Take time</button>
 			</div>
-			
-			<button id="sendTime">Take time</button>
-		</div>
-		<div id="perf">	
-			<table>
-				<thead>	
-					<tr>
-						<th scope="col">Stage</th>
-						<th scope="col">Time</th>
-					</tr>
-				</thead>
-				<tbody>
-				</tbody>
-			</table>
+			<div class="perf">	
+				<table>
+					<thead>	
+						<tr>
+							<th scope="col">Stage</th>
+							<th scope="col">Time</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
 		</div>
 		<script src="script.js"></script>
 	</body>
