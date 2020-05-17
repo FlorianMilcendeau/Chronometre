@@ -28,6 +28,16 @@ body{
   margin: 0px;
 }
 
+
+.details-animated[open] >.setting > li{
+    max-height: 100px;
+    transition: 0.5s;
+}
+
+.details-animated:not([open]) > .setting > li{
+  max-height: 0px;
+}
+
 details{
   z-index: 2;
   position: absolute;
@@ -63,6 +73,7 @@ ul.setting{
 em{
     margin-left: 2%;
     font-size: 0.9rem;
+    opacity: 1;
 }
 
 .theme-switch, .milli-switch {
