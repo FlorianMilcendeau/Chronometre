@@ -29,16 +29,12 @@ body{
 }
 
 
-.details-animated[open] >.setting > li{
-    max-height: 100px;
-    transition: 0.5s;
+.setting-animated >.setting > li{
+    animation-duration: 0.5s;
+    animation-name: setting-brochure;
 }
 
-.details-animated:not([open]) > .setting > li{
-  max-height: 0px;
-}
-
-details{
+.setting-animated{
   z-index: 2;
   position: absolute;
   top: 0;
@@ -47,23 +43,39 @@ details{
   margin-right: 10px;
   margin-top: 10px;
   width: max-content;
+  animation-name: setting;
+  animation-duration: 2.5s;
 }
-summary{
-  list-style: none;
+
+@keyframes setting{
+  from{
+    margin-right: -50px;
+  }to{
+    margin-right: 10px;
+  }
+}
+
+.logo-setting{
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top:0;
   width: min-content;
   margin-left: auto;
   margin-right: 0;
+  cursor: pointer;
 }
 
 /*CSS toggle switch colors sheme and CSS toggle switch milliseconds---------*/
 ul.setting{
-  display: inline-block;
+  display: none;
   background-color: var(--bg-color);
   padding-left: 5px;
-  margin-top: 10px;
+  margin-top: 50px;
   border-radius: 5px;
   box-shadow: 0px 0px 10px var(--shadow-color); 
 }
+
 .theme-switch-wrapper, .milli-switch-wrapper{
   display: flex;
   align-items: center;
@@ -123,22 +135,22 @@ input:checked + .slider:before, input:checked + .slider2:before {transform: tran
   grid-area: timer;
   margin-top: 100px;}
 
-#timer{
+.timer{
   font-weight: bold;
   text-align: center;
   letter-spacing: 0.1em;
-  font-size: 12vw;
+  font-size: 10vw;
   user-select: none;
   cursor: pointer;
-  animation-name: opacity;
-  animation-duration: 1s;
+  animation-name: lift-effect;
+  animation-duration: 2s;
 }
 
-@keyframes opacity{
+@keyframes lift-effect{
   from{
-    opacity: 0;
+    margin-top: -50%;
   }to {
-    opacity: 1;
+    margin-top: 0;
   }
 }
 
@@ -210,9 +222,17 @@ td{
 /*Layout for cellphone------------------------------------------------------*/
 
 @media screen and (max-width: 576px) {
-  
+   @keyframes setting-brochure{
+    from{
+      height: 0;
+    }to{
+      height: 23px;
+    }
+  }
+
   ul.setting{
     width: 195px;
+    margin-top: 40px;
   }
 
   .theme-switch, .milli-switch{
@@ -248,7 +268,6 @@ td{
   
   .perf{
     margin-top: 50px;
-    max-height: 240px;
     font-size: 12px;
     max-height: 200px;
   }
@@ -262,13 +281,20 @@ td{
 
 @media screen and (min-width: 768px) {
   
+  @keyframes setting-brochure{
+    from{
+      height: 0;
+    }to{
+      height: 37.5px;
+    }
+  }
   .layoutTime{
     display: grid;
     grid-template-areas: "timer tables";
   } 
   .perf{
     margin-top: 130px;
-    width: 300px;
+    width: 250px;
     max-height: 400px;
   }
 
