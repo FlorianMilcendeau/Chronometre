@@ -1,17 +1,17 @@
-:root{
+:root {
   --bg-color: #dfe6e9;
   --color: #212529;
   --min-color: #2d3436;
   --sec-color: #636e72;
-  --slide-color:#becacf;
+  --slide-color: #becacf;
   --slideB-color: #66bb6a;
   --shadow-color: gray;
   --table-back-title-color: #6a7b80;
 }
 
-[data-theme="dark"]{
+[data-theme="dark"] {
   --bg-color: #2d3436;
-  --color: #b2bec3 ;
+  --color: #b2bec3;
   --min-color: #636e72;
   --sec-color: #8395a7;
   --slide-color: #8395a7;
@@ -20,7 +20,7 @@
   --table-back-title-color: #3d474a;
 }
 
-body{
+body {
   background-color: var(--bg-color);
   color: var(--color);
   font-family: sans-serif;
@@ -28,13 +28,16 @@ body{
   margin: 0px;
 }
 
-
-.setting-animated >.setting > li{
-    animation-duration: 0.5s;
-    animation-name: setting-brochure;
+.settingClose > li {
+  animation-duration: 0.2s;
+  animation-name: settingBrochureClose;
 }
 
-.setting-animated{
+.settingOpen > li {
+  animation-duration: 0.2s;
+  animation-name: settingBrochureOpen;
+}
+.setting-animated {
   z-index: 2;
   position: absolute;
   top: 0;
@@ -47,57 +50,69 @@ body{
   animation-duration: 2.5s;
 }
 
-@keyframes setting{
-  from{
+@keyframes setting {
+  from {
     margin-right: -50px;
-  }to{
+  }
+  to {
     margin-right: 10px;
   }
 }
 
-.logo-setting{
+.logo-setting {
   position: absolute;
   top: 0;
   right: 0;
-  margin-top:0;
+  margin-top: 0;
   width: min-content;
   margin-left: auto;
   margin-right: 0;
   cursor: pointer;
 }
 
+.logo-setting:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
 /*CSS toggle switch colors sheme and CSS toggle switch milliseconds---------*/
-ul.setting{
+ul.setting {
   display: none;
   background-color: var(--bg-color);
   padding-left: 5px;
   margin-top: 50px;
   border-radius: 5px;
-  box-shadow: 0px 0px 10px var(--shadow-color); 
+  box-shadow: 0px 0px 10px var(--shadow-color);
 }
 
-.theme-switch-wrapper, .milli-switch-wrapper{
+.theme-switch-wrapper,
+.milli-switch-wrapper {
   display: flex;
   align-items: center;
   margin-top: 5px;
 }
 
-em{
-    margin-left: 2%;
-    font-size: 0.9rem;
-    opacity: 1;
+em {
+  margin-left: 2%;
+  font-size: 0.9rem;
+  opacity: 1;
 }
 
-.theme-switch, .milli-switch {
+.theme-switch,
+.milli-switch {
   display: inline-block;
   height: 25px;
   position: relative;
   width: 60px;
 }
 
-.theme-switch input, .milli-switch input {display:none;}
+.theme-switch input,
+.milli-switch input {
+  display: none;
+}
 
-.slider, .slider2 {
+.slider,
+.slider2 {
   background-color: var(--slide-color);
   bottom: 0;
   cursor: pointer;
@@ -105,79 +120,119 @@ em{
   position: absolute;
   right: 0;
   top: 0;
-  transition: .4s;
+  transition: 0.4s;
 }
 
-.slider:before, .slider2:before {
+.slider:before,
+.slider2:before {
   background-color: #fff;
   bottom: 4px;
   content: "";
   height: 17px;
   left: 4px;
   position: absolute;
-  transition: .4s;
+  transition: 0.4s;
   width: 17px;
 }
 
-input:checked + .slider, input:checked + .slider2 {background-color: var(--slideB-color);}
+input:checked + .slider,
+input:checked + .slider2 {
+  background-color: var(--slideB-color);
+}
 
-input:checked + .slider:before, input:checked + .slider2:before {transform: translateX(34px);}
+input:checked + .slider:before,
+input:checked + .slider2:before {
+  transform: translateX(34px);
+}
 
-.slider.round, .slider2.round2 {border-radius: 34px;}
+.slider.round,
+.slider2.round2 {
+  border-radius: 34px;
+}
 
-.slider.round:before, .slider2.round2:before {border-radius: 50%;}
+.slider.round:before,
+.slider2.round2:before {
+  border-radius: 50%;
+}
 
 /*--------------------------------------------------------------------------*/
 
-.layoutTime{z-index: 1;}
+.layoutTime {
+  z-index: 1;
+}
 
-.chrono{
+.chrono {
   grid-area: timer;
-  margin-top: 100px;}
+  margin-top: 100px;
+}
 
-.timer{
+.timer {
   font-weight: bold;
   text-align: center;
   letter-spacing: 0.1em;
   font-size: 10vw;
   user-select: none;
   cursor: pointer;
-  animation-name: lift-effect;
+  animation-name: fade-effect;
   animation-duration: 2s;
 }
 
-@keyframes lift-effect{
-  from{
-    margin-top: -50%;
-  }to {
-    margin-top: 0;
+@keyframes fade-effect {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
-#hour, #minute{color: var(--min-color);}
+.animatedPause {
+  animation: opacityTimer 1.5s infinite;
+}
 
-#seconds{
+@keyframes opacityTimer {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#hour,
+#minute {
+  color: var(--min-color);
+}
+
+#seconds {
   color: var(--sec-color);
   font-weight: normal;
 }
 
-#milliseconds{
+#milliseconds {
   display: none;
   font-size: 0.6em;
   padding-top: 7%;
 }
 
-.buttonTime{
+.buttonTime {
   display: block;
   margin-left: auto;
   margin-right: 8%;
 }
 
-.buttonTime:hover{box-shadow: 0 5px 5px var(--shadow-color);}
+.buttonTime:hover {
+  box-shadow: 0 5px 5px var(--shadow-color);
+}
 
-.buttonTime:active{box-shadow: 0 0 0;}
+.buttonTime:active {
+  box-shadow: 0 0 0;
+}
 
-.perf{
+.perf {
   grid-area: tables;
   margin-right: auto;
   margin-left: auto;
@@ -185,7 +240,7 @@ input:checked + .slider:before, input:checked + .slider2:before {transform: tran
   overflow-y: auto;
 }
 
-table{
+table {
   display: none;
   text-align: center;
   margin-top: 20px;
@@ -194,9 +249,11 @@ table{
   box-shadow: 0px 0px 10px var(--shadow-color);
 }
 
-th{font-weight: bolder;}
+th {
+  font-weight: bolder;
+}
 
-thead tr{
+thead tr {
   background-color: var(--table-back-title-color);
   color: var(--min-color);
   height: 40px;
@@ -206,13 +263,12 @@ tbody tr th {
   border-top: 1px solid rgba(106, 123, 128, 0.2);
 }
 
-
-tbody tr:hover{
+tbody tr:hover {
   background-color: rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
 
-td{
+td {
   user-select: none;
   border-top: 1px solid rgba(106, 123, 128, 0.2);
   color: var(--sec-color);
@@ -222,85 +278,126 @@ td{
 /*Layout for cellphone------------------------------------------------------*/
 
 @media screen and (max-width: 576px) {
-   @keyframes setting-brochure{
-    from{
+  @keyframes settingBrochureClose {
+    from {
+      opacity: 1;
+      height: 23px;
+    }
+    to {
+      opacity: 0;
+      height: 0px;
+    }
+  }
+
+  @keyframes settingBrochureOpen {
+    from {
+      opacity: 0;
       height: 0;
-    }to{
+    }
+    to {
+      opacity: 1;
       height: 23px;
     }
   }
 
-  ul.setting{
+  ul.setting {
     width: 195px;
     margin-top: 40px;
   }
 
-  .theme-switch, .milli-switch{
+  .theme-switch,
+  .milli-switch {
     height: 15px;
     width: 35px;
   }
-  
-  em{font-size: 8px;}
-  
-  input:checked + .slider:before, input:checked + .slider2:before {transform: translateX(18px);}
-  
-  .logo-setting{
+
+  em {
+    font-size: 8px;
+  }
+
+  input:checked + .slider:before,
+  input:checked + .slider2:before {
+    transform: translateX(18px);
+  }
+
+  .logo-setting {
     width: 30px;
     height: auto;
   }
 
-  .slider:before, .slider2:before {
+  .slider:before,
+  .slider2:before {
     left: 3px;
-    bottom: 2px; 
+    bottom: 2px;
     height: 11px;
     width: 11px;
   }
 
-  .buttonTime{
+  .buttonTime {
     font-size: 10px;
     width: 80px;
     margin-right: 55px;
   }
 
-  thead tr{height: 30px;}
+  thead tr {
+    height: 30px;
+  }
 
-  td{height: 30px;}
-  
-  .perf{
+  td {
+    height: 30px;
+  }
+
+  .perf {
     margin-top: 50px;
     font-size: 12px;
     max-height: 200px;
   }
 
-  thead tr{height: 30px;}
+  thead tr {
+    height: 30px;
+  }
 
-  td{height: 30px;}
+  td {
+    height: 30px;
+  }
 }
 
 /*layout for desktop----------------------------------------------------*/
 
 @media screen and (min-width: 768px) {
-  
-  @keyframes setting-brochure{
-    from{
+  @keyframes settingBrochureClose {
+    from {
+      opacity: 1;
+      height: 37.5px;
+    }
+    to {
+      opacity: 0;
       height: 0;
-    }to{
+    }
+  }
+
+  @keyframes settingBrochureOpen {
+    from {
+      opacity: 0;
+      height: 0;
+    }
+    to {
+      opacity: 1;
       height: 37.5px;
     }
   }
-  .layoutTime{
+  .layoutTime {
     display: grid;
     grid-template-areas: "timer tables";
-  } 
-  .perf{
+  }
+  .perf {
     margin-top: 130px;
     width: 250px;
     max-height: 400px;
   }
 
-  .table{
+  .table {
     margin-left: auto;
     margin-right: auto;
   }
-
 }
